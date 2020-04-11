@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\RestaurantRepository")
  */
 class Restaurant
@@ -62,6 +64,15 @@ class Restaurant
         $this->users = new ArrayCollection();
     }
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lng;
 
     public function getId(): ?int
     {
@@ -112,6 +123,17 @@ class Restaurant
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
 
         return $this;
     }
@@ -141,5 +163,17 @@ class Restaurant
     public function getUsers(): Collection
     {
         return $this->users;
+    }
+    
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
     }
 }

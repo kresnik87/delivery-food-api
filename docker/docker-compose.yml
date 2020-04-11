@@ -10,7 +10,7 @@ services:
       - MYSQL_PASSWORD=${DATABASE_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3309:3306"
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./database/data:/var/lib/mysql
@@ -39,7 +39,7 @@ services:
     depends_on:
       - php-fpm
     ports:
-      - "80:80"
+      - "8080:80"
       - "443:443"
 
 
