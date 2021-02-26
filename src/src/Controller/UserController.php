@@ -74,7 +74,7 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
         }
-        return new JsonResponse($user);
+        return $user;
     }
 
     protected function getIgnoreInitFields()

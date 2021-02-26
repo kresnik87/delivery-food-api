@@ -27,31 +27,31 @@ class Rate
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups({"rate-read"})
+     * @Groups({"rate-read","rate-write"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"rate-read"})
+     * @Groups({"rate-read","rate-write"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"rate-read"})
+     * @Groups({"rate-read","rate-write"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"rate-read"})
+     * @Groups({"rate-read","rate-write"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"rate-read"})
+     * @Groups({"rate-read","rate-write"})
      */
     private $maxPlaces;
 
