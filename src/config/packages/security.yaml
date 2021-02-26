@@ -85,7 +85,6 @@ security:
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api$, role: ROLE_SUPER_ADMIN }
         - { path: ^/api/index.html$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/users, role: ROLE_SUPER_ADMIN }
         - { path: ^/api/index.json$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/index.jsonld$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login, role: IS_AUTHENTICATED_ANONYMOUSLY }

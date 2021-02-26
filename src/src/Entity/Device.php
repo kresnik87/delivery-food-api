@@ -7,7 +7,6 @@ use phpDocumentor\Reflection\Types\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeviceRepository")
- * @ORM\EntityListeners({"App\EventListener\DeviceListener"})
  */
 class Device
 {
@@ -57,11 +56,7 @@ class Device
      */
     protected $user;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Notification", mappedBy="devices")
-     */
-    protected $notifications;
-
+    
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */

@@ -23,32 +23,38 @@ class User extends BaseUser
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user-read","bussines-read"})
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user-read","user-write","bussines-read"})
      */
     protected $name;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Bussines", inversedBy="user", cascade={"persist", "remove"})
+     * @Groups({"user-read"})
      */
     private $bussines;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user-read","user-write"})
      */
     protected $nif;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user-write"})
      */
     protected $surnames;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Groups({"user-read","user-write"})
      * @var string
      */
     protected $phone;
@@ -102,9 +108,12 @@ class User extends BaseUser
         return $this;
     }
 
+     /**
+     * @Groups({"user-read"})
+     */
     public function getSurnames(): ?string
     {
-        return $this->surnames;
+        return $this->surnames." asasas";
     }
 
     public function setSurnames(?string $surnames): self

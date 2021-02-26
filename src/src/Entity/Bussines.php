@@ -21,7 +21,7 @@ class Bussines
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"bussines-read"})
+     * @Groups({"bussines-read", "user-read"})
      */
     private $id;
 
@@ -33,7 +33,7 @@ class Bussines
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"bussines-read","bussines-write"})
+     * @Groups({"bussines-read","bussines-write","user-read"})
      */
     private $name;
 
@@ -44,7 +44,8 @@ class Bussines
     private $logo;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="bussines", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="bussines")
+     * @Groups({"bussines-read"})
      */
     private $user;
 

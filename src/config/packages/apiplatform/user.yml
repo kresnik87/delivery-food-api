@@ -10,6 +10,8 @@ resources:
         collectionOperations:
             register:
                 method: 'POST'
+                normalization_context:
+                   groups: ['user-read']
                 route_name: 'api_register'
             get:
                 method: 'GET'
@@ -53,48 +55,8 @@ resources:
                 method: 'PUT'
                 swagger_context:
                   summary: 'Update specific user data'
-                access_control: is_granted('ROLE_SUPER_ADMIN')
-
-            meput:
-                method: 'PUT'
-                route_name: 'api_me'
-                swagger_context:
-                    summary: 'Update current user data'
-                    parameters:
-                        -
-                            name: username
-                            in: path
-                            type: string
-                        -
-                            name: name
-                            in: path
-                            type: string
-                        - 
-                            name: surnames
-                            in: path
-                            type: string
-                        -
-                            name: email
-                            in: path
-                            type: string
-                        -
-                            name: phone
-                            in: path
-                            type: string
-                        -
-                            name: address
-                            in: path
-                            type: string
-                        -
-                            name: plainPassword
-                            in: path
-                            type: string
-                        -
-                            name: dni
-                            in: path
-                            type: string
-                access_control: is_granted('ROLE_USER')
-
+                
+            
 
             login:
                 method: 'POST'

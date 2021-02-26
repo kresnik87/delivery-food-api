@@ -13,7 +13,7 @@ use App\Helpers\ObjectUtils;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use FOS\UserBundle\Mailer\TwigSwiftMailer;
 use Doctrine\ORM\Mapping\Entity;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 class UserController extends AbstractController
 {
     /**
@@ -98,7 +98,7 @@ class UserController extends AbstractController
 
         //create  User
         $em   = $this->getDoctrine()->getManager();
-        $user = $this->objUtils->initialize(new User(), $params, $this->getIgnoreInitFields());
+        $user = $this->initialize(new User(), $params, $this->getIgnoreInitFields());
 
         //check password
         $pasword = null;
@@ -118,12 +118,9 @@ class UserController extends AbstractController
                 $pasword = $params["plainPassword"];
             }
         }
-        else
-        {
-            $user->setPlainPassword($pasword);
-        }
-
-
+       
+        $user->setPlainPassword($pasword);
+       
         if (!isset($params["enabled"]) || $params["enabled"] !== false || $params["enabled"] !== 'false')
         {
             $user->setEnabled(true);
@@ -131,7 +128,7 @@ class UserController extends AbstractController
         //save
         $em->persist($user);
         $em->flush();
-        return $user;
+        return new JsonResponse($user);
     }
 
     public function logoutAction(Request $request)
