@@ -2,31 +2,78 @@
 
 namespace App\EventListener;
 
+use App\Entity\NotificationConfig;
 use Doctrine\ORM\Mapping as ORM;
-use Essedi\EasyCommerce\EventListener\NotificationConfigListener as BaseNotificationConfigListener;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use App\Service\NotificationGenerator;
 
-class NotificationConfigListener extends BaseNotificationConfigListener
+class NotificationConfigListener
 {
 
-    public function __construct(RequestStack $requestStack, NotificationGenerator $notGen)
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+
+    /**
+     * @var NotificationGenerator
+     */
+    protected $notGen;
+
+    public function __construct(
+        RequestStack $requestStack,
+        NotificationGenerator $notGen)
     {
-        parent::__construct($requestStack, $notGen);
+        $this->requestStack = $requestStack;
+        $this->notGen       = $notGen;
     }
 
     /**
-     * @ORM\PreUpdate 
+     * @ORM\PreUpdate
      */
-    public function preUpdateHandler(\App\Entity\NotificationConfig $config, LifecycleEventArgs $event)
+    public function preUpdateHandler(NotificationConfig $config, LifecycleEventArgs $event)
     {
-        parent::preUpdateHandler($config, $event);
+        $this->topicSubscriber($config, $event);
     }
 
-    protected function topicSubscriber(\App\Entity\NotificationConfig $config, LifecycleEventArgs $event)
+    protected function topicSubscriber(NotificationConfig $config, LifecycleEventArgs $event)
     {
-        parent::topicSubscriber($config, $event);
-    }
 
+        if ($event->hasChangedField(NotificationConfig::NOTIFICATION_TOPIC_NEWSLETTER))
+        {
+            if ($config->getNewsletter())
+            {
+                $this->notGen->subscribeUserToTopic(NotificationConfig::NOTIFICATION_TOPIC_NEWSLETTER, $config->getUser());
+            }
+            else
+            {
+                $this->notGen->unsubscribeUserToTopic(NotificationConfig::NOTIFICATION_TOPIC_NEWSLETTER, $config->getUser());
+            }
+        }
+
+        if ($event->hasChangedField(NotificationConfig::NOTIFICATION_TOPIC_OFFERS))
+        {
+            if ($config->getOffers())
+            {
+                $this->notGen->subscribeUserToTopic(NotificationConfig::NOTIFICATION_TOPIC_OFFERS, $config->getUser());
+            }
+            else
+            {
+                $this->notGen->unsubscribeUserToTopic(NotificationConfig::NOTIFICATION_TOPIC_OFFERS, $config->getUser());
+            }
+        }
+
+        if ($event->hasChangedField(NotificationConfig::NOTIFICATION_TOPIC_CAMPAIGNS))
+        {
+            if ($config->getCampaigns())
+            {
+                $this->notGen->subscribeUserToTopic(NotificationConfig::NOTIFICATION_TOPIC_CAMPAIGNS, $config->getUser());
+            }
+            else
+            {
+                $this->notGen->unsubscribeUserToTopic(NotificationConfig::NOTIFICATION_TOPIC_CAMPAIGNS, $config->getUser());
+            }
+        }
+    }
 }

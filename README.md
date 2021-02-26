@@ -41,7 +41,15 @@ docker-compose run php-fpm sh
  
  https://drive.google.com/open?id=1ZXXnO07ybKz6O6cH2uSnFZ05Iua5GupI 
  
+ ### Create bd and execute migration in fresh bd
+1 - Execute this command
+ ```
+  php bin/console doctrine:migrations:execute --up 20210226123136
+ ```
+
+ 
  ### Create admin user to manage backend EasyAdmin
+
 1 - First create client_id and client_secret
   ```
  php bin/console fos:oauth-server:create-client --redirect-uri="api/login" --grant-type="password" --grant-type="client_credentials" 

@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\BussinesRepository")
+ * @ORM\EntityListeners({"App\EventListener\BussinesListener"})
  */
 class Bussines
 {

@@ -87,13 +87,13 @@ class UserController extends AbstractController
         $params = json_decode($request->getContent(), true);
         if (!$params || !count($params) || !isset($params["username"]) || !isset($params["email"]))
         {
-            throw new InvalidArgumentException("Needs params to register");
+            return new JsonResponse("missing_parameters",Response::HTTP_BAD_REQUEST);
         }
         //check email and username
         $email = $this->getDoctrine()->getRepository(User::class)->findOneByEmail($params["email"]);
         if ($email)
         {
-            throw new InvalidArgumentException("Email in use");
+            return new JsonResponse("email_in_use",Response::HTTP_BAD_REQUEST);
         }
 
         //create  User
@@ -109,7 +109,7 @@ class UserController extends AbstractController
                 //check passwords match
                 if ($params["password"] !== $params["password_conf"])
                 {
-                    throw new InvalidArgumentException("Passwords not match");
+                    return new JsonResponse("password_not_match",Response::HTTP_BAD_REQUEST);
                 }
                 $pasword = $params["password"];
             }
@@ -128,7 +128,7 @@ class UserController extends AbstractController
         //save
         $em->persist($user);
         $em->flush();
-        return new JsonResponse($user);
+        return $user;
     }
 
     public function logoutAction(Request $request)

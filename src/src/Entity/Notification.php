@@ -16,23 +16,30 @@ class Notification
     const NOTIFICATION_TYPE_ENTITY = 'entity';
     const NOTIFICATION_TYPE_MAIL   = 'mail';
 
+
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
+
+
+
     public $image;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Essedi\TranslateMe
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Essedi\TranslateMe
      */
     protected $title;
 
     /**
      * @ORM\Column(type="string", length=2500, nullable=true)
-     * @Essedi\TranslateMe(type="ckeditor")
      */
     protected $description;
 

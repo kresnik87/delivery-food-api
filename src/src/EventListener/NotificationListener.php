@@ -3,36 +3,35 @@
 namespace App\EventListener;
 
 use Doctrine\ORM\Mapping as ORM;
-use Essedi\EasyCommerce\EventListener\NotificationListener as BaseNotificationListener;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Entity\Notification;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use App\Service\NotificationGenerator;
 
-class NotificationListener extends BaseNotificationListener
+class NotificationListener
+
 {
 
-    public function __construct(RequestStack $requestStack, NotificationGenerator $notGen)
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+
+
+    public function __construct(
+        RequestStack $requestStack
+        )
     {
-        parent::__construct($requestStack, $notGen);
+        $this->requestStack = $requestStack;
     }
 
     /**
-     * @ORM\PostPersist 
+     * @ORM\PostPersist
      */
     public function postPersistHandler(Notification $not, LifecycleEventArgs $event)
     {
-        try
-        {
-            parent::postPersistHandler($not, $event);
-        }
-        catch (Exception $e)
-        {
-            if (getenv("APP_ENV") !== 'prod')
-            {
-                throw new Exception($e);
-            }
-        }
+        //send push when creates
+//        $this->notGen->sendNotification($not); // Send manually on subscription event to catch easyadmin addition
     }
+
 
 }

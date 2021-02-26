@@ -16,7 +16,7 @@ resources:
             get:
                 method: 'GET'
 #                access_control: is_granted('ROLE_SUPER_ADMIN')
-                
+
             post:
                 method: 'POST'
                 access_control: is_granted('ROLE_SUPER_ADMIN')
@@ -24,8 +24,10 @@ resources:
             image:
                 method: 'POST'
                 route_name: 'api_user_image'
+                swagger_context:
+                  summary: 'Create a user image'
                 access_control: is_granted('ROLE_USER')
-            
+
         itemOperations:
             me:
                 method: 'GET'
@@ -35,7 +37,14 @@ resources:
                     parameters:
                         {}
                 access_control: is_granted('ROLE_USER')
-                
+            register:
+                method: 'POST'
+                route_name: 'api_register'
+                swagger_context:
+                  summary: 'Create user'
+                  parameters:
+                    { }
+
             logout:
                 method: 'POST'
                 route_name: 'logout'
@@ -55,8 +64,8 @@ resources:
                 method: 'PUT'
                 swagger_context:
                   summary: 'Update specific user data'
-                
-            
+
+
 
             login:
                 method: 'POST'
