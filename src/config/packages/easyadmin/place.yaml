@@ -1,0 +1,26 @@
+easy_admin:
+  entities:
+    Place:
+      class: App\Entity\Place
+      label: menu.place
+      list:
+        title: menu.place
+        fields:
+          - { property: 'id', label: 'id' }
+          - { property: 'name', label: 'name' }
+          - { property: 'createdDate', label: 'created'}
+          - { property: 'updatedDate', label: 'updated'}
+      show:
+        title: menu.place
+        fields:
+          - { property: 'id', label: 'id' }
+          - { property: 'name', label: 'name' }
+          - { property: 'created', label: 'created'}
+          - { property: 'updated', label: 'updated'}
+          - { property: 'lat', label: 'latitud'}
+          - { property: 'lng', label: 'longitud'}
+          - { property: 'image', label: 'image'}
+          - { property: 'bussines', label: 'bussines' }
+
+
+

@@ -48,3 +48,10 @@ services:
             - '@security.token_storage'
         tags:
             - { name: doctrine.orm.entity_listener }
+
+
+    App\Serializer\FilesNormalizer:
+        arguments:
+            - '@api_platform.serializer.normalizer.item'
+            - '@parameter_bag'
+        tags: [ name:'serializer.normalizer', priority:5 ]

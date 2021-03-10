@@ -1,0 +1,14 @@
+resources:
+    App\Entity\Shop:
+        attributes:
+            normalization_context:
+                groups: ['shop-read']
+            denormalization_context:
+                groups: ['shop-write']
+        collectionOperations:
+            get:
+                method: 'GET'
+
+            post:
+                method: 'POST'
+

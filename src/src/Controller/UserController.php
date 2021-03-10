@@ -34,7 +34,7 @@ class UserController extends AbstractController
     /**
      * @var LoggerInterface
      */
-    protected $logger;
+    public $logger;
 
     public function __construct(
         StorageInterface $storage,
@@ -154,19 +154,6 @@ class UserController extends AbstractController
         }
     }
 
-    public function uploadImageAction(Request $request, $id = null)
-    {
-        $uploadedFile = $request->files->get('file');
-        //get user
-        $user         = $id ? $this->getDoctrine()->getRepository(User::class)->find($id) : $this->getUser();
-        $user->setImageFile($uploadedFile);
-        //save data
-        $em           = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
-
-        return new Response(getEnv("BASE_URL") . $this->storage->resolveUri($user, "imageFile"));
-    }
 
     public function resetPasswordRequestAction(Request $request)
     {

@@ -4,5 +4,6 @@ easy_admin:
             - { entity: Bussines, icon: 'store' }
             - { entity: User, icon: 'user' }
             - { entity: Rate, icon: 'list-alt' }
+            - { entity: Place, icon: 'list-alt' }
 
 

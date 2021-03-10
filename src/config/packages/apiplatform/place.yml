@@ -1,0 +1,19 @@
+resources:
+    App\Entity\Place:
+        attributes:
+            normalization_context:
+                groups: ['place-read']
+        collectionOperations:
+            get:
+                method: 'GET'
+
+            post:
+                method: 'POST'
+
+            image:
+                method: 'POST'
+                route_name: 'api_place_image'
+                swagger_context:
+                    summary: 'Create a place image'
+                access_control: is_granted('ROLE_USER')
+

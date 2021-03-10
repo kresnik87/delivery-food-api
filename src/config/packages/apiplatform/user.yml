@@ -58,7 +58,6 @@ resources:
                 method: 'GET'
                 swagger_context:
                     summary: 'retrives specific user data'
-                access_control: is_granted('ROLE_SUPER_ADMIN')
 
             put:
                 method: 'PUT'

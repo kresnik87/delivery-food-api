@@ -9,6 +9,7 @@ easy_admin:
                 fields:
                     - { property: 'id', label: 'id' }
                     - { property: 'name', label: 'name'}
+                    - { property: 'rate', label: 'rate'}
 
                     
 

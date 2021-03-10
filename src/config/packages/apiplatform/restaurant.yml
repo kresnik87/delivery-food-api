@@ -1,0 +1,14 @@
+resources:
+    App\Entity\Restaurant:
+        attributes:
+            normalization_context:
+                groups: ['rest-read']
+            denormalization_context:
+                groups: ['rest-write']
+        collectionOperations:
+            get:
+                method: 'GET'
+
+            post:
+                method: 'POST'
+

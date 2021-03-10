@@ -22,3 +22,5 @@ framework:
 
     templating:
         engines: ['twig', 'php']
+parameters:
+     uploableFiles: '%env(UPLOADBLE_FILES)%'
