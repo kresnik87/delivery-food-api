@@ -1,4 +1,5 @@
 /docker/logs/*
 /docker/database/data/*
 /src/var/*
+/src/public/images/*
 .env
