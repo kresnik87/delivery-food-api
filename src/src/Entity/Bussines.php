@@ -22,19 +22,19 @@ class Bussines
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"bussines-read", "user-read"})
+     * @Groups({"bussines-read", "user-read","rest-read","shop-read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"bussines-read","bussines-write"})
+     * @Groups({"bussines-read","bussines-write","rest-read","shop-read"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"bussines-read","bussines-write","user-read"})
+     * @Groups({"bussines-read","bussines-write","user-read","rest-read","shop-read"})
      */
     private $name;
 

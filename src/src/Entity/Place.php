@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Interfaces\BusinessInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,9 +18,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"restaurant" = "Restaurant","shop"="Shop"})
+ * @ORM\EntityListeners({"App\EventListener\PlaceListener"})
  * @Vich\Uploadable
  */
-abstract class Place
+abstract class Place implements BusinessInterface
 {
     /**
      * @ORM\Id()
@@ -61,6 +63,7 @@ abstract class Place
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Bussines", inversedBy="places")
+     * @Groups({"rest-read","shop-read"})
      */
     private $bussines;
 
@@ -78,6 +81,12 @@ abstract class Place
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updatedDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"rest-read","rest-write","shop-read","shop-write"})
+     */
+    private $address;
 
     public function __construct()
     {
@@ -225,6 +234,18 @@ abstract class Place
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 
 

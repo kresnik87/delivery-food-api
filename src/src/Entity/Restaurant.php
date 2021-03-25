@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Interfaces\BusinessInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\RestaurantRepository")
  */
-class Restaurant extends Place
+class Restaurant extends Place implements BusinessInterface
 {
 
 
@@ -24,6 +25,7 @@ class Restaurant extends Place
 
     public function __construct()
     {
+        parent::__construct();
         $this->menus = new ArrayCollection();
     }
 
