@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+
+set_php(){
+
+cat <<EOF > $PHP_INI_DIR/conf.d/docker-php-ext-opcache-conf.ini
+opcache.enable=0
+opcache.memory_consumption=256
+opcache.interned_strings_buffer=64
+opcache.max_accelerated_files=32531
+opcache.validate_timestamps=0
+opcache.revalidate_freq=0
+opcache.fast_shutdown=1
+EOF
+}
+
+set_php
+
+#if [ "${1#-}" != "$1" ]; then
+#    set -- /usr/bin/supervisord "$@"
+#fi
+
+exec "$@"

@@ -1,0 +1,45 @@
+security:
+  enable_authenticator_manager: true
+  # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+  password_hashers:
+    BSN\Delivery\Domain\User\User: 'auto'
+  role_hierarchy:
+    ROLE_USER: ROLE_USER
+    ROLE_PROVIDER: ROLE_PROVIDER
+    ROLE_PAYER: ROLE_PAYER
+    ROLE_ADMIN_PAYER: ROLE_ADMIN_PAYER
+    ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+  # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+  providers:
+    app_user_provider:
+      entity:
+        class: BSN\Core\Domain\User\User
+        property: email
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      pattern: ^/api
+      provider: app_user_provider
+      stateless: true
+      json_login:
+        check_path: /api/login_check
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        username_path: email
+        password_path: password
+      jwt: ~
+
+
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+  access_control:
+    - { path: ^/admin, roles: [ IS_AUTHENTICATED_FULLY, ROLE_SUPER_ADMIN ] }
+    - { path: ^/api/docs, role: PUBLIC_ACCESS  }
+    - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/sign-up/, role: PUBLIC_ACCESS  }
+    - { path: ^/_profiler, role: ROLE_SUPER_ADMIN }
+
+

@@ -1,0 +1,21 @@
+#USER
+api_user_image:
+    path: '/api/me/image'
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\ImageController::userImageAction
+        _api_collection_operation_name: 'image_profile'
+api_users_image:
+    path: '/api/users/image/{id}'
+    methods: ['GET','POST']
+    defaults:
+        _controller: App\Controller\ImageController::userImageAction
+        _api_collection_operation_name: 'image'
+        
+#Places
+api_place_image:
+    path: '/api/place/image'
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\ImageController::placeImageAction
+        _api_collection_operation_name: 'image_profile'

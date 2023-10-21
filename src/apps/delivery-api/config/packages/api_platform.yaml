@@ -1,0 +1,41 @@
+api_platform:
+    title: '%env(APP_NAME)%'
+    description: '%env(APP_DESCRIPTION)%'
+    version: '%env(APP_VERSION)%'
+    defaults:
+      pagination_client_items_per_page: true
+      pagination_items_per_page: 25
+      pagination_items_per_page_parameter_name: limit
+    mapping:
+      paths: [ '%kernel.project_dir%/src/ApiPlatform/Resource/' ]
+    patch_formats:
+      json: [ 'application/merge-patch+json' ]
+    exception_to_status:
+      # The 4 following handlers are registered by default, keep those lines to prevent unexpected side effects
+      Symfony\Component\Serializer\Exception\ExceptionInterface: 400 # Use a raw status code (recommended)
+      ApiPlatform\Exception\InvalidArgumentException: !php/const Symfony\Component\HttpFoundation\Response::HTTP_BAD_REQUEST
+      ApiPlatform\Exception\FilterValidationException: 400
+      # Validation exception
+      ApiPlatform\Validator\Exception\ValidationException: !php/const Symfony\Component\HttpFoundation\Response::HTTP_UNPROCESSABLE_ENTITY
+
+      # Custom mapping
+      BSN\Shared\Domain\Exception\ServiceException: 406 # Here is the handler for our custom exception
+      BSN\Shared\Domain\Exception\MissingParameterException: !php/const Symfony\Component\HttpFoundation\Response::HTTP_BAD_REQUEST
+    formats:
+      json:
+        mime_types: [ 'application/json' ]
+
+      jsonapi: [ 'application/vnd.api+json' ]
+      jsonld: [ 'application/ld+json' ]
+      html: [ 'text/html' ]
+      multipart: ['multipart/form-data']
+      pdf: ['application/pdf']
+  # Enable the Swagger documentation and export.
+    enable_swagger: true
+  # Enable the docs.
+    enable_docs: true
+    doctrine_mongodb_odm:
+      enabled: false
+    swagger:
+      versions: [ 3 ]
+      api_keys: []
