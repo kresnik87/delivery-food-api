@@ -1,0 +1,5 @@
+spec_shaper_encrypt:
+    encrypt_key: '%env(SPEC_SHAPER_ENCRYPT_KEY)%'
+    is_disabled: false # Turn this to true to disable the encryption.
+    connections:   # Optional, define the connection name(s) for the subscriber to listen to.
+        - 'default'

@@ -1,7 +1,7 @@
 easy_admin:
   entities:
     Rate:
-      class: App\Entity\Rate
+      class: KsK\Delivery\Domain\Rate\Rate
       label: menu.rate
       # controller: App\Controller\Admin\TariffController
       list:
@@ -34,11 +34,11 @@ easy_admin:
             type: choice
             type_options:
               choices:
-                daily: !php/const App\Entity\Rate::RATE_TYPE_DAILY
-                weekly: !php/const App\Entity\Rate::RATE_TYPE_WEEKLY
-                biweekly: !php/const App\Entity\Rate::RATE_TYPE_BIWEEKLY
-                monthly: !php/const App\Entity\Rate::RATE_TYPE_MONTHLY
-                yearly: !php/const App\Entity\Rate::RATE_TYPE_YEARLY
+                daily: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_DAILY
+                weekly: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_WEEKLY
+                biweekly: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_BIWEEKLY
+                monthly: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_MONTHLY
+                yearly: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_YEARLY
           - { property: 'daysFree', label: 'daysFree'}
           - { property: 'price', type: 'money', type_options: { currency: 'EUR' } }
           - { property: 'maxPlaces', label: 'maxPlaces'}

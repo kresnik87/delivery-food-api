@@ -20,7 +20,5 @@ framework:
     php_errors:
         log: true
 
-    templating:
-        engines: ['twig', 'php']
 parameters:
      uploableFiles: '%env(UPLOADBLE_FILES)%'

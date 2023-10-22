@@ -1,6 +1,6 @@
 <?php
 
-namespace KSK\Shared\Infrastructure\Bus\Event;
+namespace KsK\Shared\Infrastructure\Bus\Event;
 
 use KsK\Shared\Application\Bus\Event\NotificationEventBusInterface;
 use KsK\Shared\Domain\Event\NotificationEventInterface;

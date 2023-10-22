@@ -1,6 +1,6 @@
 <?php
 
-namespace KSK\Shared\Infrastructure\Bus\Query;
+namespace KsK\Shared\Infrastructure\Bus\Query;
 
 use KsK\Shared\Application\Bus\Query\QueryBusInterface;
 use KsK\Shared\Application\Bus\Query\QueryInterface;

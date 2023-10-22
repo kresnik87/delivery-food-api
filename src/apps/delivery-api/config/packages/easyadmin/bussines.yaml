@@ -1,8 +1,8 @@
 easy_admin:
-    entities:    
-       Bussines:
+    entities:
+       Business:
             disabled_actions: ['delete']
-            class: App\Entity\Bussines
+            class: KsK\Delivery\Domain\Business\Business
             label: menu.bussines
             list:
                 title: menu.bussines
@@ -11,7 +11,7 @@ easy_admin:
                     - { property: 'name', label: 'name'}
                     - { property: 'rate', label: 'rate'}
 
-                    
 
-                    
+
+
 

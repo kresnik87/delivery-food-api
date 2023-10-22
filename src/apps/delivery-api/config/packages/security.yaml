@@ -5,9 +5,8 @@ security:
     BSN\Delivery\Domain\User\User: 'auto'
   role_hierarchy:
     ROLE_USER: ROLE_USER
-    ROLE_PROVIDER: ROLE_PROVIDER
-    ROLE_PAYER: ROLE_PAYER
-    ROLE_ADMIN_PAYER: ROLE_ADMIN_PAYER
+    ROLE_BUSINESS: ROLE_BUSINESS
+    ROLE_RIDER: ROLE_RIDER
     ROLE_SUPER_ADMIN: ROLE_ADMIN
 
   # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider

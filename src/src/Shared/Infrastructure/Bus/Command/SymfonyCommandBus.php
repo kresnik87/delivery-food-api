@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace KSK\Shared\Infrastructure\Bus\Command;
+namespace KsK\Shared\Infrastructure\Bus\Command;
 
 use KsK\Shared\Application\Bus\Command\CommandBusInterface;
 use KsK\Shared\Application\Bus\Command\CommandInterface;
