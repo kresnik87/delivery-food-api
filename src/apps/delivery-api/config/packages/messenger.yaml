@@ -1,0 +1,29 @@
+framework:
+    messenger:
+        default_bus: command.bus
+
+        buses:
+            command.bus: []
+            query.bus: []
+            domainEvent.bus:
+                default_middleware: allow_no_handlers
+            notificationEvent.bus:
+                default_middleware: allow_no_handlers
+
+        transports:
+#            domain_async:
+#                dsn: '%env(RABBITMQ_URL_DOMAIN)%'
+#                options:
+#                    queues:
+#                        '%env(RABBITMQ_QUEUE_NAME_DOMAIN)%': ~
+#            notification_async:
+#                dsn: '%env(RABBITMQ_URL_NOTIFICATION)%'
+#                options:
+#                    queues:
+#                        '%env(RABBITMQ_QUEUE_NAME_NOTIFICATION)%': ~
+            sync: 'sync://'
+        routing:
+            'KsK\Shared\Domain\Event\DomainEventInterface': sync
+            'KsK\Shared\Application\Bus\Command\CommandInterface': sync
+            'KsK\Shared\Application\Bus\Query\QueryInterface': sync
+            'KsK\Shared\Domain\Event\NotificationEventInterface': sync

@@ -1,0 +1,9 @@
+api_platform:
+    resource: .
+    type: api_platform
+    prefix: /api
+
+action:
+    resource: KsK/Apps/Delivery/src/Action
+    type: api_platform
+    prefix: /api

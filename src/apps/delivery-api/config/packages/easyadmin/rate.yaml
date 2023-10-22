@@ -1,0 +1,47 @@
+easy_admin:
+  entities:
+    Rate:
+      class: KsK\Delivery\Domain\Rate\Rate
+      label: menu.rate
+      # controller: App\Controller\Admin\TariffController
+      list:
+        title: menu.rate
+        fields:
+          - { property: 'id', label: 'id' }
+          - { property: 'name', label: 'name' }
+          - { property: 'type', label: 'type', template: 'easy_admin/translate.html.twig' }
+          - { property: 'price', label: 'price'}
+          - { property: 'maxPlaces', label: 'maxPlaces'}
+      show:
+        title: menu.rate
+        fields:
+          - { property: 'id', label: 'id' }
+          - { property: 'name', label: 'name' }
+          - { property: 'type', label: 'type', template: 'easy_admin/translate.html.twig'}
+          - { property: 'price', label: 'price'}
+          - { property: 'daysFree', label: 'daysFree'}
+          - { property: 'numWorkers', label: 'numWorkers'}
+          - { property: 'description', label: 'description' }
+
+
+      form:
+        title: menu.rate
+        fields:
+          - { property: 'name', label: 'name' }
+          -
+            property: 'type'
+            label: 'type'
+            type: choice
+            type_options:
+              choices:
+                daily: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_DAILY
+                weekly: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_WEEKLY
+                biweekly: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_BIWEEKLY
+                monthly: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_MONTHLY
+                yearly: !php/const KsK\Delivery\Domain\Rate\RateType::RATE_TYPE_YEARLY
+          - { property: 'daysFree', label: 'daysFree'}
+          - { property: 'price', type: 'money', type_options: { currency: 'EUR' } }
+          - { property: 'maxPlaces', label: 'maxPlaces'}
+          - { property: 'description', label: 'description'}
+
+

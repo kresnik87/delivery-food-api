@@ -1,0 +1,17 @@
+easy_admin:
+    entities:
+       Business:
+            disabled_actions: ['delete']
+            class: KsK\Delivery\Domain\Business\Business
+            label: menu.bussines
+            list:
+                title: menu.bussines
+                fields:
+                    - { property: 'id', label: 'id' }
+                    - { property: 'name', label: 'name'}
+                    - { property: 'rate', label: 'rate'}
+
+
+
+
+

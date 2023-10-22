@@ -1,0 +1,48 @@
+services:
+ mariadb_api:
+  image: mariadb:10.11-rc-jammy
+  environment:
+    MYSQL_ROOT_PASSWORD: docker_root
+    MYSQL_DATABASE: delivery
+    MYSQL_USER: docker_user
+    MYSQL_PASSWORD: docker_pass
+  ports:
+    - "3309:3306"
+  restart: on-failure
+  networks:
+    - api_net
+  volumes:
+    - db-data:/application
+
+ delivery_backend:
+    build:
+      context: docker/php-fpm
+    container_name: delivery_backend-php
+    working_dir: /application
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      - "9000:9001"
+    depends_on:
+      - mariadb_api
+    networks:
+      - api_net
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+      - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      - .:/application:delegated
+      - ./docker/php-fpm/php/supervisor/supervisor.conf:/etc/supervisor/conf.d/supervisor.conf
+  #   command: bash -c "symfony serve --dir=/application/apps/api/public --port=8080 -vvv "
+
+volumes:
+ db-data:
+
+networks:
+ api_net:
+   name: api_net
+   driver: bridge
+
+
+

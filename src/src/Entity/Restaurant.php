@@ -29,8 +29,7 @@ class Restaurant extends Place implements BusinessInterface
         $this->menus = new ArrayCollection();
     }
 
-
-    /**
+   /**
      * @return Collection|Menu[]
      */
     public function getMenus(): Collection

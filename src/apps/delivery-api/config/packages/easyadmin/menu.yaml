@@ -1,0 +1,8 @@
+easy_admin:
+    design:
+        menu:
+            - { entity: Bussines, icon: 'store' }
+            - { entity: User, icon: 'user' }
+            - { entity: Place, icon: 'list-alt' }
+
+
